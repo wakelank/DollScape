@@ -1,5 +1,8 @@
 var ItemCollectionView = Backbone.View.extend({
-  initialize: function(){
+  initialize: function(options){
+    this.options = options || {}
+    console.log(options.itemXPos)
+    debugger;
     this.listenTo(this.collection, 'all', this.render);
 
   },
