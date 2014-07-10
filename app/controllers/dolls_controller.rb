@@ -1,11 +1,11 @@
 class DollsController < ApplicationController
 
   def index
-    dolls = Doll.all
-    render json: dolls.to_json
+    @dolls = Doll.all.to_json
+    #render json: dolls.to_json
   end
 
-  def create 
+  def create
     new_doll = Doll.create(doll_params)
 
     redirect_to root_path
@@ -16,7 +16,7 @@ class DollsController < ApplicationController
     render json: doll.to_json
   end
 
-  def update 
+  def update
     doll = Doll.find(params[:id])
     doll.update(doll_params)
     redirect_to index
@@ -27,9 +27,8 @@ class DollsController < ApplicationController
     redirect_to root
   end
 
-  private 
+  private
   def doll_params
     doll_params = params.require(:doll).permit(:name,:xPos, :yPos, :color)
   end
 end
-
