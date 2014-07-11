@@ -1,16 +1,25 @@
 var ItemView = Backbone.View.extend({
-  initialize: function(){
-    this.listenTo(this.model, 'all', this.render)
+  initialize: function(options){
+
+    this.options = options || {}
+    // this.listenTo(this.model, 'all', this.render)
+    console.log("itemview init" + this.options)
+    
+
+    this.render(options)
   },
-  render: function(){
+  render: function(options){
+    this.options = options || {}
+    debugger;
     var item = this.model;
-    var xPos = 50;
-    var yPos = 70;
+    var xPos = options.itemXPos;
+    var yPos = 10;
     var height = 20;
     var width = 20;
     var color = item.get("color");
     //debugger;
-
+    console.log(this)
+    //debugger;
     switch (item.get("itemType")){
       case "shirt":
         var shirt = s.rect(xPos, yPos, width, height);
