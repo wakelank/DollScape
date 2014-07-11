@@ -14,7 +14,7 @@ var ItemCollectionView = Backbone.View.extend({
     var itemView = new ItemView({
       model: item,
       itemXPos : options.itemXPos,
-      //itemYPos : options.itemYPos
+      itemYPos : options.itemYPos
 
     });
     

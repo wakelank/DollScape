@@ -10,10 +10,10 @@ var ItemView = Backbone.View.extend({
   },
   render: function(options){
     this.options = options || {}
-    debugger;
+    
     var item = this.model;
     var xPos = options.itemXPos;
-    var yPos = 10;
+    var yPos = options.itemYPos;
     var height = 20;
     var width = 20;
     var color = item.get("color");

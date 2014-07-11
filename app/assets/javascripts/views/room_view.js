@@ -37,17 +37,16 @@ var RoomView = Backbone.View.extend({
     item_collection.url = "/rooms/" + this.model.get("id") + "/items";
 
     var itemXPos= xPos + 10;
-    var itemYPos= yPos - 10;
+    var itemYPos= yPos + 20;
     var that = this;
     item_collection.fetch({
-    success: function(){
-    
+      success: function(){
         item_collection_view = new ItemCollectionView({
-        collection: item_collection,
-        itemXPos: itemXPos,
-        itemYPos: itemYPos
-
-      });
+          collection: item_collection,
+          itemXPos: itemXPos,
+          itemYPos: itemYPos
+        });
+        debugger;
       //item_collection_view.render();
     }
   });
