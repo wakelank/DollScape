@@ -1,10 +1,12 @@
 var ItemView = Backbone.View.extend({
-  initialize: function(){
+  initialize: function(options){
+    this.options = options || {}
+    
     this.listenTo(this.model, 'all', this.render)
   },
-  render: function(){
+  render: function(options){
     var item = this.model;
-    var xPos = 50;
+    var xPos = options.itemXPos;
     var yPos = 70;
     var height = 20;
     var width = 20;

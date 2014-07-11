@@ -37,7 +37,7 @@ var RoomView = Backbone.View.extend({
     item_collection.url = "/rooms/" + this.model.get("id") + "/items";
     item_collection.fetch({
     success: function(){
-      console.log(item_collection);
+      // console.log(item_collection);
       item_collection_view = new ItemCollectionView({
         collection: item_collection,
         itemXPos: 10,
