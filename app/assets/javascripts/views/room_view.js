@@ -1,6 +1,6 @@
 var RoomView = Backbone.View.extend({
     // initialize: function(){
-    //   //this.listenTo(this.model, 'all', this.render)
+
     // },
     render: function(){
       var room = this.model
@@ -46,7 +46,7 @@ var RoomView = Backbone.View.extend({
           itemXPos: itemXPos,
           itemYPos: itemYPos
         });
-        debugger;
+
       //item_collection_view.render();
     }
   });

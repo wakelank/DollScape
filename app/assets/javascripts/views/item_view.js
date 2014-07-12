@@ -22,32 +22,28 @@ var ItemView = Backbone.View.extend({
     //debugger;
     switch (item.get("itemType")){
       case "shirt":
-        var shirt = s.rect(xPos, yPos, width, height);
-        shirt.attr({
+        var item_image = s.rect(xPos, yPos, width, height); //shirt
+        item_image.attr({
           fill: color,
-          stroke : "#ffffff",
-          strokeWidth : 3
         });
-        shirt.drag();
         break;
       case "ball":
-        var ball = s.circle(xPos, yPos, 10);
-        ball.attr({
+        var item_image = s.circle(xPos, yPos, 10); //ball
+        item_image.attr({
           fill: color,
-          stroke:"#ffffff",
-          strokeWidth: 3
         });
-        ball.drag();
         break;
       case "box":
-      var box = s.rect(xPos, yPos, width, height);
-      box.attr({
+      var item_image = s.rect(xPos, yPos, width, height);  //box
+      item_image.attr({
         fill: color,
-        stroke : "#ffffff",
-        strokeWidth : 3
       });
-      box.drag();
       break;
     };
+    item_image.attr({
+      stroke: "#000000",
+      strokeWidth: 3
+    });
+    item_image.drag();
   }
 });

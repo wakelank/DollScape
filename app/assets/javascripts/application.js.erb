@@ -106,20 +106,32 @@ function clothesOff(clothes){
 
     //myDoll.makeDoll();
 
+    //     _.each(this.collection.models, function(room){
+    // var roomView = new RoomView({model: room});
+    // roomView.render();
+
+    
+
+
 
 
 $(function(){
-
+  var doll = new Doll({id: "1"});
+  var doll_items = new ItemCollection();
   var room_collection = new RoomCollection();
   room_collection.url = "/rooms";
+
+
+
+    
   room_collection.fetch({
     success: function(){
-      console.log(room_collection);
       room_collection_view = new RoomCollectionView({
         collection: room_collection
-      });
-      room_collection_view.render();
-    }
+      
+    })
+    debugger;
+  }
   });
 
 
