@@ -119,7 +119,7 @@ function define_movement_rules(){
 $('.item').each(function(i){
   $(this).drag()
 })
-
+debugger;
 
 }
 
@@ -145,10 +145,9 @@ $(function(){
      });
 
       
-     define_movement_rules();
    } 
   });
-  debugger;
+
 
   $('.make-doll-btn').click(function(){
     var doll = new Doll({id: "1"});

@@ -41,7 +41,8 @@ var RoomView = Backbone.View.extend({
       success: function(){
         dollView = new DollView({
           model: doll
-        })
+        });
+        dollItemCollection = new ItemCollection();
       }
     });
   }

@@ -34,7 +34,7 @@ var ItemView = Backbone.View.extend({
         });
         break;
       case "box":
-      var item_image = s.rect(xPos, yPos, width, height);  //box
+      var item_image = s.rect(84, 105, width, height);  //box
       item_image.attr({
         fill: color,
       });
@@ -46,8 +46,23 @@ var ItemView = Backbone.View.extend({
       id: item.get("itemType") + item.get("id"),
       class: "item"
     });
-    
-    //item_image.drag();
+    //debugger;
+    var dollArr = document.getElementsByClassName("doll");
 
-  }
+    var dollBox = dollArr[0].getBBox()
+    var moveFunc = function( dx, dy, posx, posy){
+      this.attr({ x: posx, y: posy-100})
+
+      if (Snap.path.isPointInsideBBox(dollBox,this.attr("x"),this.attr("y"))){
+        console.log("IN!");
+
+      }
+
+    }
+    //item_image.drag()
+    item_image.drag(moveFunc);
+    
+  } 
+
+  
 });
