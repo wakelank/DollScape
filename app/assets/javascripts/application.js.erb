@@ -109,6 +109,9 @@ function clothesOff(clothes){
     //     _.each(this.collection.models, function(room){
     // var roomView = new RoomView({model: room});
     // roomView.render();
+//TODO mabe if variable were assigned out here,
+//and then rendered in the Views, then the 
+//complex drag functions could be put here.
 
 function define_movement_rules(){
   var dollArr = document.getElementsByClassName("doll");
@@ -119,7 +122,6 @@ function define_movement_rules(){
 $('.item').each(function(i){
   $(this).drag()
 })
-debugger;
 
 }
 
@@ -133,7 +135,11 @@ $(function(){
   room_collection.url = "/rooms";
 
 
-  
+//Snap.load("app/svg_images/doll.svg", onSVGLoaded ) ;
+
+function onSVGLoaded( data ){ 
+    s.append( data );
+}
 
 
 
