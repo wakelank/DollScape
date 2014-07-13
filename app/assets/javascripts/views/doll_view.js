@@ -11,9 +11,24 @@ var DollView = Backbone.View.extend({
       fill: this.model.attributes.color,
       id: doll.get("name"),
       class: "doll"
-    })
+    });
 
-    doll_image.drag();
+    var moveFunc = function( dx, dy, posx, posy){
+      //TODO this  y-100 is to take into account the header
+      //need to use the x, y values of the Snap paper, not 
+      //page.  maybe this.arr("x"), this.attr("y")
+      this.attr({ cx: posx, cy: posy-100})
+
+      var itemsArr = doll_items.models;
+  //TODO see if an each function would work
+      for (var i = 0; i < itemsArr.length; i++ ){
+        itemsArr[i].attributes.attr({ x: posx, y: posy-100 })
+      }
+  
+
+    }
+
+    doll_image.drag(moveFunc);
 
     return this;
   }

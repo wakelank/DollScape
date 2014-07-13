@@ -51,11 +51,13 @@ var ItemView = Backbone.View.extend({
 
     var dollBox = dollArr[0].getBBox()
     var moveFunc = function( dx, dy, posx, posy){
+      //TODO this  y-100 is to take into account the header
+      //need to use the x, y values of the Snap paper, not 
+      //page.  maybe this.arr("x"), this.attr("y")
       this.attr({ x: posx, y: posy-100})
 
       if (Snap.path.isPointInsideBBox(dollBox,this.attr("x"),this.attr("y"))){
-        console.log("IN!");
-
+        doll_items.push(this);
       }
 
     }
