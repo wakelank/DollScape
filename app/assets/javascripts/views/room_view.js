@@ -9,7 +9,7 @@ var RoomView = Backbone.View.extend({
       var xPos = 10;
       var yPos = 10;
       var margin = 5;
-
+//TODO room.get would probably work here
       switch (room.attributes.quadrant){
         case 2:
           xPos = xPos + width + margin;
@@ -27,7 +27,24 @@ var RoomView = Backbone.View.extend({
         fill : "#ffffff",
         stroke: "#000000",
         strokeWidth: "3",
-      })
+        id : room.get("name")
+      });
+
+  //TODO DollView should be get rooms/:id/dolls/ 
+  //so we don't need this if statement and 
+  //the last location of the doll can be saved.
+
+  if (room.attributes.quadrant == 1){
+    var doll = new Doll({id: "1"});
+
+    doll.fetch({
+      success: function(){
+        dollView = new DollView({
+          model: doll
+        })
+      }
+    });
+  }
 
     var item_collection = new ItemCollection({
       // itemxPos: xPos + 10,

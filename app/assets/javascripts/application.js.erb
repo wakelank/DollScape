@@ -110,7 +110,18 @@ function clothesOff(clothes){
     // var roomView = new RoomView({model: room});
     // roomView.render();
 
-    
+function define_movement_rules(){
+  var dollArr = document.getElementsByClassName("doll");
+  var itemArr = document.getElementsByClassName("item");
+  var dollelem = dollArr[0];
+
+//TODO see if un underscore each function would wor
+$('.item').each(function(i){
+  $(this).drag()
+})
+
+
+}
 
 
 
@@ -122,18 +133,22 @@ $(function(){
   room_collection.url = "/rooms";
 
 
+  
 
-    
+
+
+  
   room_collection.fetch({
     success: function(){
       room_collection_view = new RoomCollectionView({
         collection: room_collection
-      
-    })
-    debugger;
-  }
-  });
+     });
 
+      
+     define_movement_rules();
+   } 
+  });
+  debugger;
 
   $('.make-doll-btn').click(function(){
     var doll = new Doll({id: "1"});
@@ -152,5 +167,7 @@ $(function(){
      // })
      //dollView.render();
   })
+  
+
 
 })

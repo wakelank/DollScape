@@ -42,8 +42,12 @@ var ItemView = Backbone.View.extend({
     };
     item_image.attr({
       stroke: "#000000",
-      strokeWidth: 3
+      strokeWidth: 3,
+      id: item.get("itemType") + item.get("id"),
+      class: "item"
     });
-    item_image.drag();
+    
+    //item_image.drag();
+
   }
 });

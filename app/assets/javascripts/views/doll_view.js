@@ -8,7 +8,9 @@ var DollView = Backbone.View.extend({
     var doll = this.model;
     var doll_image = s.circle(doll.get("xPos"), doll.get("yPos"), 50);
     doll_image.attr({
-      fill: this.model.attributes.color
+      fill: this.model.attributes.color,
+      id: doll.get("name"),
+      class: "doll"
     })
 
     doll_image.drag();
