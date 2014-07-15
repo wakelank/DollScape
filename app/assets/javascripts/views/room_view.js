@@ -1,9 +1,9 @@
 var RoomView = Backbone.View.extend({
-    render: function(){
-      var room = this.model;
-      var g = s.group();
-      var browserWidth = window.innerWidth;
-      var browserHeight = window.innerHeight;
+  render: function(){
+    var room = this.model;
+    var g = s.group();
+    var browserWidth = window.innerWidth;
+    var browserHeight = window.innerHeight;
 
       Snap.load("assets" + room.attributes.file_name, function(f){
     
@@ -29,61 +29,53 @@ var RoomView = Backbone.View.extend({
         room_image.transform(matrix);
     
      });
-    
+      
 
 
 
 
-  //TODO DollView should be get rooms/:id/dolls/ 
-  //so we don't need this if statement and 
-  //the last location of the doll can be saved.
+    //TODO DollView should be get rooms/:id/dolls/ 
+    //so we don't need this if statement and 
+    //the last location of the doll can be saved.
 
-      if (room.attributes.quadrant == 1){
-        var doll = new Doll({id: "1"});
+    if (room.attributes.quadrant == 1){
+      var doll = new Doll({id: "1"});
 
-        doll.fetch({
-          success: function(){
-            dollView = new DollView({
-              model: doll
-            });
-          }
-        });
-      }
+      doll.fetch({
+        success: function(){
+          dollView = new DollView({
+            model: doll
+          });
+        }
+      });
     }
+      
 
-//     item_collection.url = "/rooms/" + this.model.get("id") + "/items";
-//     item_collection.fetch({
-//     success: function(){
-//       // console.log(item_collection);
-//       item_collection_view = new ItemCollectionView({
-//         collection: item_collection,
-//         itemXPos: 10,
-//         itemYPos: 10
-//   })
-// }
-
-  //   var item_collection = new ItemCollection({
-  //     // itemxPos: xPos + 10,
-  //     // itemYPos: yPos - 10
-
-  //   });
-  //   item_collection.url = "/rooms/" + this.model.get("id") + "/items";
-
-  //   var itemXPos= xPos + 10;
-  //   var itemYPos= yPos + 20;
-  //   var that = this;
-  //   item_collection.fetch({
+     // item_collection.url = "/rooms/" + this.model.get("id") + "/items";
+  //     item_collection.fetch({
   //     success: function(){
+  //       // console.log(item_collection);
   //       item_collection_view = new ItemCollectionView({
   //         collection: item_collection,
-  //         itemXPos: itemXPos,
-  //         itemYPos: itemYPos
-  //       });
+  //         itemXPos: 10,
+  //         itemYPos: 10
+  //   })
+  // }
 
-  //     //item_collection_view.render();
-  //   }
-  // });
+    var item_collection = new ItemCollection({});
+    item_collection.url = "/rooms/" + this.model.get("id") + "/items";
 
+  //   var itemXPos= xPos + 10;
+    //var itemYPos= yPos + 20;
+    //var that = this;
+    item_collection.fetch({
+      success: function(){
+        item_collection_view = new ItemCollectionView({
+          collection: item_collection
+        });
 
-   
+      item_collection_view.render();
+      }
+     });
+  }
 });

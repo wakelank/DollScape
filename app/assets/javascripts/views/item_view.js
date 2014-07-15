@@ -9,61 +9,85 @@ var ItemView = Backbone.View.extend({
     this.render(options)
   },
   render: function(options){
-    this.options = options || {}
-    
     var item = this.model;
-    var xPos = options.itemXPos;
-    var yPos = options.itemYPos;
-
-    var height = 20;
-    var width = 20;
     var color = item.get("color");
-    //debugger;
-    console.log(this)
-    //debugger;
-    switch (item.get("itemType")){
-      case "shirt":
-        var item_image = s.rect(xPos, yPos, width, height); //shirt
-        item_image.attr({
-          fill: color,
-        });
-        break;
-      case "ball":
-        var item_image = s.circle(xPos, yPos, 10); //ball
-        item_image.attr({
-          fill: color,
-        });
-        break;
-      case "box":
-      var item_image = s.rect(84, 105, width, height);  //box
-      item_image.attr({
-        fill: color,
-      });
-      break;
-    };
-    item_image.attr({
-      stroke: "#000000",
-      strokeWidth: 3,
-      id: item.get("itemType") + item.get("id"),
-      class: "item"
-    });
-    //debugger;
-    var dollArr = document.getElementsByClassName("doll");
+    var g = s.group();
+    var browserWidth = window.innerWidth;
+    var browserHeight = window.innerHeight;
 
-    var dollBox = dollArr[0].getBBox()
+    Snap.load("assets/" + item.attributes.file_name, function(f){
+      item_image = g.append(f);
+      var matrix = room_image.transform().globalMatrix;
+      item_image.transform("s0.25")
+      matrix.scale(.25)
+      item_image.attr({
+        id: item.get("itemType") + item.get("id"),
+        class: "item"
+      });
+      //item_image.transform(matrix);
+
+     
+        item_image.cx = 40;
+        item_image.cy = 140;
+        item_image.ox = 0;
+        item_image.oy = 0;
+
+        item_image.drag(dragging, startDrag, function(evt) {
+            console.log("dropped at: "+ evt.x + ", " + evt.y);
+        });
+
+
+    });
+
+
+        startDrag = function(posx, posy) {
+          this.ox = posx - this.cx;
+          this.oy = posy - this.cy;
+        }
+
+        dragging = function(dx, dy, posx, posy) {
+          this.cx = posx - this.ox;
+          this.cy = posy - this.oy;
+          t = 't' + this.cx + ',' + this.cy;
+          this.transform(t);
+          
+        }
+
+
+
+
+    
+
+
+
+
+
+ 
+    //debugger;
+    // var dollArr = document.getElementsByClassName("doll");
+    var oldX = 0;
+    var oldY = 0;
+    // var dollBox = dollArr[0].getBBox()
     var moveFunc = function( dx, dy, posx, posy){
       //TODO this  y-100 is to take into account the header
       //need to use the x, y values of the Snap paper, not 
       //page.  maybe this.arr("x"), this.attr("y")
-      this.attr({ x: posx, y: posy-100})
 
-      if (Snap.path.isPointInsideBBox(dollBox,this.attr("x"),this.attr("y"))){
-        doll_items.push(this);
-      }
+      var newX = oldX - posx;
+      var newY = oldY - posy;
+      oldX = newX;
+      oldY = newY;
+      console.log(newX+":"+newY)
+      var matrix = this.transform().globalMatrix;
+      matrix.translate(newX, newY);
+      this.transform(matrix);
+
+      // if (Snap.path.isPointInsideBBox(dollBox,this.attr("x"),this.attr("y"))){
+      //   doll_items.push(this);
+      // }
 
     }
     //item_image.drag()
-    item_image.drag(moveFunc);
     
   } 
 

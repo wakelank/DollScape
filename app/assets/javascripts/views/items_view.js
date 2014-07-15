@@ -8,13 +8,11 @@ var ItemCollectionView = Backbone.View.extend({
   },
   render: function(options){
     this.options = options || {}
-    console.log("Collection render " + options.itemXPos);
 
     _.each(this.collection.models, function(item){
     var itemView = new ItemView({
       model: item,
-      itemXPos : options.itemXPos,
-      itemYPos : options.itemYPos
+
 
     });
     
