@@ -1,43 +1,34 @@
 var RoomView = Backbone.View.extend({
-    // initialize: function(){
-
-    // },
     render: function(){
       var room = this.model;
-      var width = 200;
-      var height = 200;
-      var xPos = 10;
-      var yPos = 10;
-      var margin = 5;
       var g = s.group();
+      var browserWidth = window.innerWidth;
+      var browserHeight = window.innerHeight;
+
       Snap.load("assets" + room.attributes.file_name, function(f){
-        //TODO room.get would probably work here
-        switch (room.attributes.quadrant){
-          case 2:
-            xPos = xPos + width + margin;
-            break;
-          case 3:
-            yPos = yPos + height + margin;
-            break;
-          case 4:
-            xPos = xPos + width + margin;
-            yPos = yPos + height + margin;
-            break;
-        }
+    
+      room_image = g.append(f);
+      var matrix = room_image.transform().globalMatrix;
+      matrix.scale(.5)
+      //TODO room.get would probably work here
+      switch (room.attributes.quadrant){
+        case 2:
+          matrix.translate(browserWidth, 0);
+          break;
+        case 3:
+          matrix.translate(0,browserHeight);
+          break;
+        case 4:
+        matrix.translate(browserWidth,browserHeight)
+          break;
+      }
 
-        console.log("Room: "+ room.get("name"))
-
-      
-          room_image = g.append(f);
-             room_image.attr({
-
+      room_image.attr({
           id : room.get("name")
-        });
-          
-
-
-
       });
+      room_image.transform(matrix);
+    
+  });
 
 
 
@@ -46,17 +37,17 @@ var RoomView = Backbone.View.extend({
   //so we don't need this if statement and 
   //the last location of the doll can be saved.
 
-  // if (room.attributes.quadrant == 1){
-  //   var doll = new Doll({id: "1"});
+  if (room.attributes.quadrant == 1){
+    var doll = new Doll({id: "1"});
 
-  //   doll.fetch({
-  //     success: function(){
-  //       dollView = new DollView({
-  //         model: doll
-  //       });
-  //     }
-  //   });
-  // }
+    doll.fetch({
+      success: function(){
+        dollView = new DollView({
+          model: doll
+        });
+      }
+    });
+  }
 
   //   var item_collection = new ItemCollection({
   //     // itemxPos: xPos + 10,

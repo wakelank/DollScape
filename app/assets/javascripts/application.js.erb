@@ -130,16 +130,16 @@ var doll_items = new ItemCollection();
 
 
 $(function(){
-  var doll = new Doll({id: "1"});
+  // var doll = new Doll({id: "1"});
   var room_collection = new RoomCollection();
   room_collection.url = "/rooms";
 
 
 //Snap.load("app/svg_images/doll.svg", onSVGLoaded ) ;
 
-function onSVGLoaded( data ){ 
-    s.append( data );
-}
+// function onSVGLoaded( data ){ 
+//     s.append( data );
+// }
 
 
 
@@ -153,6 +153,7 @@ function onSVGLoaded( data ){
       
    } 
   });
+
 
 
   $('.make-doll-btn').click(function(){
