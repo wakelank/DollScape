@@ -15,9 +15,9 @@ var ItemView = Backbone.View.extend({
     var browserWidth = window.innerWidth;
     var browserHeight = window.innerHeight;
 
-    Snap.load("assets/" + item.attributes.file_name, function(f){
+    Snap.load("images/" + item.attributes.file_name, function(f){
       item_image = g.append(f);
-      var matrix = room_image.transform().globalMatrix;
+      var matrix = room_image.transform().localMatrix;
       item_image.transform("s0.25")
       matrix.scale(.25)
       item_image.attr({
@@ -50,7 +50,7 @@ var ItemView = Backbone.View.extend({
           this.cy = posy - this.oy;
           t = 't' + this.cx + ',' + this.cy;
           this.transform(t);
-          
+
         }
 
 

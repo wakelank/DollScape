@@ -5,7 +5,7 @@ var RoomView = Backbone.View.extend({
     var browserWidth = window.innerWidth;
     var browserHeight = window.innerHeight;
 
-      Snap.load("assets" + room.attributes.file_name, function(f){
+      Snap.load("images/" + room.attributes.file_name, function(f){
     
         room_image = g.append(f);
         var matrix = room_image.transform().globalMatrix;

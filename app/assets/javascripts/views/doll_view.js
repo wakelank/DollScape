@@ -14,7 +14,7 @@ var DollView = Backbone.View.extend({
     //   class: "doll"
     // });
 
-    Snap.load("assets/" + doll.attributes.file_name, function(f){
+    Snap.load("images/" + doll.attributes.file_name, function(f){
       var doll_image = g.append(f);
       var matrix = doll_image.transform().globalMatrix;
       var browserWidth = window.innerWidth;
