@@ -30,11 +30,8 @@ var RoomView = Backbone.View.extend({
       
           room_image = g.append(f);
              room_image.attr({
-          stroke: "#000000",
-          strokeWidth: "3",
-          id : room.get("name"),
-          x: 100,
-          y: 150
+
+          id : room.get("name")
         });
           
 
