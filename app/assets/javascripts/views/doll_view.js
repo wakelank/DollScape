@@ -14,10 +14,16 @@ var DollView = Backbone.View.extend({
     //   class: "doll"
     // });
 
-    // Snap.load("assets/" + doll.attributes.file_name, function(f){
-    //   var doll_image = g.append(f);
-    //   var matrix = doll_image.transform().globalMatrix;
-    // })
+    Snap.load("assets/" + doll.attributes.file_name, function(f){
+      var doll_image = g.append(f);
+      var matrix = doll_image.transform().globalMatrix;
+      var browserWidth = window.innerWidth;
+      matrix.scale(.4);
+      matrix.translate(browserWidth/4, -10)
+      doll_image.transform(matrix);
+      doll_image.drag();
+    })
+
 
   //   var moveFunc = function( dx, dy, posx, posy){
   //     //TODO this  y-100 is to take into account the header
