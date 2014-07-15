@@ -32,9 +32,8 @@ var ItemView = Backbone.View.extend({
         item_image.ox = 0;
         item_image.oy = 0;
 
-        item_image.drag(dragging, startDrag, function(evt) {
-            console.log("dropped at: "+ evt.x + ", " + evt.y);
-        });
+        item_image.drag(dragging, startDrag);
+
 
 
     });
@@ -50,12 +49,13 @@ var ItemView = Backbone.View.extend({
           this.cy = posy - this.oy;
           t = 't' + this.cx + ',' + this.cy + " S0.25";
           var matrix = this.transform().localMatrix;
-          matrix.translate(this.cx, this.cy);
-          console.log(matrix);
-         // this.transform(matrix);
-         this.transform(t);
-
-          //debugger;
+          this.transform(t);
+          ;
+          var doll_path = Snap.select('#doll_path');
+          console.log(posx + "::" + posy)
+          if (Snap.path.isPointInside(doll_path, posx, posy)){
+                  doll_items.push(this);
+          }
 
         }
 
