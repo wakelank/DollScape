@@ -21,6 +21,7 @@ var DollView = Backbone.View.extend({
       matrix.scale(.4);
       matrix.translate(browserWidth/4, -10)
       doll_image.transform(matrix);
+      doll_image.drag();
     })
 
 
@@ -39,7 +40,7 @@ var DollView = Backbone.View.extend({
 
   //   }
 
-    // doll_image.drag(moveFunc);
+    
 
     return this;
   }
