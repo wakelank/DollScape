@@ -40,3 +40,5 @@ gem 'spring',        group: :development
 gem 'jasmine', group: [:development, :test]
 gem 'rspec-rails', group: [:development, :test]
 
+gem 'rails_12factor'
+
