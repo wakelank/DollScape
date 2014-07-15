@@ -10,7 +10,9 @@ var RoomView = Backbone.View.extend({
       var yPos = 10;
       var margin = 5;
 
-      Snap.load(room.attributes.file_name, function(f){
+      s = Snap('#snapdiv')
+      debugger;
+      Snap.load("assets" + room.attributes.file_name, function(f){
         //TODO room.get would probably work here
         switch (room.attributes.quadrant){
           case 2:
@@ -24,12 +26,16 @@ var RoomView = Backbone.View.extend({
             yPos = yPos + height + margin;
             break;
         }
-        var room_image = s.append(xPos, yPos, width, height);
+
+        console.log("Room: "+ room.get("name"))
+      
+        var room_image = s.append(f);
         room_image.attr({
-          fill : "#ffffff",
           stroke: "#000000",
           strokeWidth: "3",
-          id : room.get("name")
+          id : room.get("name"),
+          x: 100,
+          y: 150
         });
 
 
@@ -78,5 +84,5 @@ var RoomView = Backbone.View.extend({
   // });
 
 
-  //   }
+   }
 });
