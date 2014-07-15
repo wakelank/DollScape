@@ -7,28 +7,29 @@ var RoomView = Backbone.View.extend({
 
       Snap.load("assets" + room.attributes.file_name, function(f){
     
-      room_image = g.append(f);
-      var matrix = room_image.transform().globalMatrix;
-      matrix.scale(.5)
-      //TODO room.get would probably work here
-      switch (room.attributes.quadrant){
-        case 2:
-          matrix.translate(browserWidth, 0);
-          break;
-        case 3:
-          matrix.translate(0,browserHeight);
-          break;
-        case 4:
-        matrix.translate(browserWidth,browserHeight)
-          break;
-      }
+        room_image = g.append(f);
+        var matrix = room_image.transform().globalMatrix;
+        matrix.scale(.5)
+        //TODO room.get would probably work here
+        switch (room.attributes.quadrant){
+          case 2:
+            matrix.translate(browserWidth, 0);
+            break;
+          case 3:
+            matrix.translate(0,browserHeight);
+            break;
+          case 4:
+          matrix.translate(browserWidth,browserHeight)
+            break;
+        }
 
-      room_image.attr({
-          id : room.get("name")
-      });
-      room_image.transform(matrix);
+        room_image.attr({
+            id : room.get("name")
+        });
+        room_image.transform(matrix);
     
-  });
+     });
+    
 
 
 
@@ -37,17 +38,18 @@ var RoomView = Backbone.View.extend({
   //so we don't need this if statement and 
   //the last location of the doll can be saved.
 
-  if (room.attributes.quadrant == 1){
-    var doll = new Doll({id: "1"});
+      if (room.attributes.quadrant == 1){
+        var doll = new Doll({id: "1"});
 
-    doll.fetch({
-      success: function(){
-        dollView = new DollView({
-          model: doll
+        doll.fetch({
+          success: function(){
+            dollView = new DollView({
+              model: doll
+            });
+          }
         });
       }
-    });
-  }
+    }
 
 //     item_collection.url = "/rooms/" + this.model.get("id") + "/items";
 //     item_collection.fetch({
