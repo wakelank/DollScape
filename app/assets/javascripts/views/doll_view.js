@@ -31,12 +31,12 @@ var DollView = Backbone.View.extend({
       doll_image.ox = 0;
       doll_image.oy = 0;
 
-     doll_image.drag(draggingDoll,startDragDoll);
+     doll_image.drag(draggingDoll,startDragDoll,stopDragDoll);
      //doll_image.drag();
 
     });
 
-
+      var roomArr = Snap.selectAll('.room');
 
       startDragDoll = function(posx, posy) {
         this.ox = posx - this.cx;
@@ -45,9 +45,10 @@ var DollView = Backbone.View.extend({
         c.attr({id:"circle"});
         s.append(c);
         var itemsArr = Snap.selectAll('.item');
-        ;
+        
         for (var i = 0; i < itemsArr.length; ++ i){
           if (Snap.path.isPointInsideBBox(c.getBBox(), itemsArr[i].posx, itemsArr[i].posy)){
+
             doll_items.push(itemsArr[i])
             console.log("push " + doll_items.length)
           }
@@ -64,7 +65,7 @@ var DollView = Backbone.View.extend({
 
       }
 
-      draggingDoll = function(dx, dy, posx, posy) {
+      draggingDoll = function(dx, dy, posx, posy){
 
         this.cx = posx - this.ox;
         this.cy = posy - this.oy;
@@ -72,25 +73,38 @@ var DollView = Backbone.View.extend({
         this.posy = posy;
         t = 't' + this.cx + ',' + this.cy + " S0.4";
         this.transform(t);
-        var roomArr = Snap.selectAll('.room');
-        var bigRoom;
-        for (var i = 0; i < roomArr.length; ++ i){
-          roomArr[i].remove()
-          if (Snap.path.isPointInsideBBox(roomArr[i].getBBox(), posx, posy)){
-            bigRoom = roomArr[i];
-          }else{
-            s.append(roomArr[i]);
-          }
-          s.append(bigRoom);
+
+        for (var i = 0; i < doll_items.length; i++ ){
+          t = 't' + this.cx + ',' + this.cy + " S0.1";
+        doll_items[i].transform(t);
         }
+        
+
+      }
+
+      stopDragDoll = function(e){
+        var bigRoom;
+        smallScale = "S0.2";
+        bigScale = "S0.9";
+
+        for (var i = 0; i < roomArr.length; ++ i){
+          roomBox = roomArr[i].getBBox();
+          
+          if (Snap.path.isPointInsideBBox(roomBox, e.x, e.y)) {
+        
+           console.log("in " + roomArr[i].node.id)
+            roomArr[i].transform(bigScale);
+          }else{
+            roomArr[i].transform(smallScale);
+           console.log("out " + roomArr[i].node.id)
+          }
+        }
+
       }      
 
     // //TODO see if an each function would work
     // todo items should be in a collection
-        for (var i = 0; i < doll_items.length; i++ ){
-          t = 't' + this.cx + ',' + this.cy + " S0.1";
-          doll_items[i].transform(t);
-        }
+
         
 
 
@@ -117,6 +131,6 @@ var DollView = Backbone.View.extend({
 
     
 
-    return this;
-  }
+    //return this;
+  
 });
