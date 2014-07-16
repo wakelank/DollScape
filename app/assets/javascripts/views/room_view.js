@@ -12,26 +12,56 @@ var RoomView = Backbone.View.extend({
       Snap.load("images/" + room.attributes.file_name, function(f){
     
         room_image = g.append(f);
-        var matrix = room_image.transform().globalMatrix;
-        matrix.scale(.5)
+        // if (topRoom != "none")
+        // var y = topRoom.getBBox().height || room_image.getBBox().height;
+        // var x = topRoom.getBBox().width || room_image.getBBox().width;
         //TODO room.get would probably work here
         switch (room.attributes.quadrant){
+          case 1:
+          debugger;
+            x = 0 - room_image.getBBox().x;
+            y = 0 - room_image.getBBox().y;
+            translate = "t" + x + "," + y;
+            scale = "s.8"
+            topRoom = room_image
+
+            break;
           case 2:
-            matrix.translate(browserWidth, 0);
+            var currentX = room_image.getBBox().x;
+            var currentY = room_image.getBBox().y;
+            var destX=0;
+            var destY = topRoom.getBBox().width;
+
+            var scale = "s.3"
+            var translate = "t"+(destX - currentX) + "," + (destY-currentY)
             break;
           case 3:
-            matrix.translate(0,browserHeight);
+            var currentX = room_image.getBBox().x;
+            var currentY = room_image.getBBox().y;
+            var destX=0;
+            var destY = topRoom.getBBox().width + 150;
+
+            var scale = "s.3"
+            var translate = "t"+(destX - currentX) + "," + (destY-currentY)
+
+
             break;
           case 4:
-          matrix.translate(browserWidth,browserHeight)
-            break;
-        }
+            var currentX = room_image.getBBox().x;
+            var currentY = room_image.getBBox().y;
+            var destX=0;
+            var destY = topRoom.getBBox().width + 300;
 
+            var scale = "s.3"
+            var translate = "t"+(destX - currentX) + "," + (destY-currentY)
+          break;
+        }
         room_image.attr({
             id : room.get("name"),
             class : "room"
         });
-        room_image.transform(matrix);
+        room_image.transform(scale + " " + translate);
+        room_image.drag();
     
      });
       
@@ -43,11 +73,14 @@ var RoomView = Backbone.View.extend({
     //so we don't need this if statement and 
     //the last location of the doll can be saved.
 
-    if (room.attributes.quadrant == 1){
+    if (room.attributes.quadrant == 4){
       var doll = new Doll(this.options.doll);
       dollView = new DollView({model: doll});
       dollView.render();
     }
+
+
+
       
 
      // item_collection.url = "/rooms/" + this.model.get("id") + "/items";
@@ -78,3 +111,22 @@ var RoomView = Backbone.View.extend({
      });
   }
 });
+
+function  moveRoomTo(room, x, y){
+  //room = Snap.select('#'+roomId);
+  room_box = room.getBBox();
+  var cx = x - room_box.x;
+  var cy = y - room_box.y;
+  room.transform("t" + cx + "," + cy);
+}
+
+function scaleRoom(room, size){
+
+  if(size == "big"){
+    scale_factor = .5;
+  }else{
+    scale_factor = .3;
+  }
+  room.transform("s"+scale_factor);
+
+}

@@ -8,15 +8,17 @@ var DollView = Backbone.View.extend({
     //   fill: this.model.attributes.color,
     //   id: doll.get("name"),
     //   class: "doll"
-    // });
-    console.log(doll.attributes);
+    // });    
     Snap.load("images/" + doll.attributes.file_name, function(f){
       var doll_image = g.append(f);
       var matrix = doll_image.transform().globalMatrix;
       var browserWidth = window.innerWidth;
       var doll_path = Snap.select('#doll_path');
+      doll_image.attr({
+        class : "doll"
+      });
       matrix.scale(.4);
-      matrix.translate(browserWidth/4, -10)
+      matrix.translate(browserWidth/4, -10);
       doll_image.transform(matrix);
       Snap.path.map(doll_path, matrix);
 
