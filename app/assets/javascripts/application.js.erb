@@ -26,12 +26,12 @@ var quadrant =  0;
 
 function clothesOff(clothes){
   clothes.drag(function(dx, dy, x, y, e){
-        this.attr( { x: x, y: y } );
-        var box = doll.getBBox();
-        if (Snap.path.isPointInsideBBox(box, x, y)){
-          clothesArr.push(clothes);
-          clothes.undrag();
-        }
+    this.attr( { x: x, y: y } );
+    var box = doll.getBBox();
+    if (Snap.path.isPointInsideBBox(box, x, y)){
+      clothesArr.push(clothes);
+      clothes.undrag();
+    }
   })
 }
 
@@ -126,22 +126,18 @@ $('.item').each(function(i){
 }
 
 var doll_items = [];
-var room
-
-var room_collection = new RoomCollection();
-room_collection.url = "/rooms";
-
+var room;
 
 // Changes XML to JSON
 function xmlToJson(xml) {
-  
+
   // Create the return object
   var obj = {};
 
   if (xml.nodeType == 1) { // element
     // do attributes
     if (xml.attributes.length > 0) {
-    obj["@attributes"] = {};
+      obj["@attributes"] = {};
       for (var j = 0; j < xml.attributes.length; j++) {
         var attribute = xml.attributes.item(j);
         obj["@attributes"][attribute.nodeName] = attribute.nodeValue;
@@ -156,10 +152,10 @@ function xmlToJson(xml) {
     for(var i = 0; i < xml.childNodes.length; i++) {
       var item = xml.childNodes.item(i);
       var nodeName = item.nodeName;
-      if (typeof(obj[nodeName]) == "undefined") {
+      if (typeof(obj[nodeName]) === "undefined") {
         obj[nodeName] = xmlToJson(item);
       } else {
-        if (typeof(obj[nodeName].push) == "undefined") {
+        if (typeof(obj[nodeName].push) === "undefined") {
           var old = obj[nodeName];
           obj[nodeName] = [];
           obj[nodeName].push(old);
@@ -171,67 +167,3 @@ function xmlToJson(xml) {
   return obj;
 };
 
-
-$(function(){
-  // var doll = new Doll({id: "1"});
-
-
-//Snap.load("app/svg_images/doll.svg", onSVGLoaded ) ;
-
-// function onSVGLoaded( data ){ 
-//     s.append( data );
-// }
-$('.color-btn').click(function(){
-  Snap.select('#doll_path').attr({
-    fill: "#DFC183"
-  })
-
-})
-$('.color-zapper-btn').click(function(){
-
-  $.ajax({
-    url: "http://www.colourlovers.com/api/palettes/random",
-    method: "get",
-    dataType: "xml",
-    succes: function(data){
-      var jsonData = xmlToJson(data);
-      debugger;
-    }
-  })
-})
-
-
-  
-  room_collection.fetch({
-    success: function(){
-      room_collection_view = new RoomCollectionView({
-        collection: room_collection
-     });
-
-      
-   } 
-  });
-
-
-
-  $('.make-doll-btn').click(function(){
-    var doll = new Doll({id: "1"});
-
-    doll.fetch({
-      success: function(){
-        dollView = new DollView({
-          model: doll
-        })
-      }
-    })
-
-    //collection.add(doll);
-     // dollView = new DollView({
-     //   model: doll
-     // })
-     //dollView.render();
-  })
-  
-
-
-})

@@ -1,7 +1,7 @@
 class DollsController < ApplicationController
 
   def index
-    @dolls = Doll.all.to_json
+    @doll = Doll.first.to_json
     #render json: dolls.to_json
   end
 

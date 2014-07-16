@@ -1,7 +1,53 @@
 <button class="color-btn">skin color</button>
 <button class="color-zapper-btn">color zapper</button>
-  <script>
+<script>
+
+$(function(){
+  var doll = <%== @doll %>;
+  // var doll = new Doll({id: "1"});
+
+
+//Snap.load("app/svg_images/doll.svg", onSVGLoaded ) ;
+
+// function onSVGLoaded( data ){ 
+//     s.append( data );
+// }
+
+var room_collection = new RoomCollection();
+room_collection.url = "/rooms";
+
+room_collection.fetch({
+  success: function(){
+    room_collection_view = new RoomCollectionView({
+      collection: room_collection,
+      doll: doll
+    });
+  } 
+});
+
+
+})
+
 var s = Snap();
+
+$('.color-btn').click(function(){
+  Snap.select('#doll_path').attr({
+    fill: "#DFC183"
+  });
+
+});
+$('.color-zapper-btn').click(function(){
+
+  $.ajax({
+    url: "http://www.colourlovers.com/api/palettes/random",
+    method: "get",
+    dataType: "xml",
+    succes: function(data){
+      var jsonData = xmlToJson(data);
+      debugger;
+    }
+  });
+});
 
 
 //removes pants if doubleclicked

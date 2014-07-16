@@ -1,8 +1,4 @@
 var DollView = Backbone.View.extend({
-  initialize: function(){
-    this.listenTo(this.model, 'all', this.render)
-  },
-
   render: function(){
 
     var doll = this.model;

@@ -12,8 +12,6 @@ var ItemCollectionView = Backbone.View.extend({
     _.each(this.collection.models, function(item){
     var itemView = new ItemView({
       model: item,
-
-
     });
     
     //itemView.render();

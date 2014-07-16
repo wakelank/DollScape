@@ -1,5 +1,9 @@
 var RoomView = Backbone.View.extend({
-  render: function(){
+  initialize: function(options) {
+    this.options = options || {};
+  },
+
+  render: function(){    
     var room = this.model;
     var g = s.group();
     var browserWidth = window.innerWidth;
@@ -40,15 +44,9 @@ var RoomView = Backbone.View.extend({
     //the last location of the doll can be saved.
 
     if (room.attributes.quadrant == 1){
-      var doll = new Doll({id: "1"});
-
-      doll.fetch({
-        success: function(){
-          dollView = new DollView({
-            model: doll
-          });
-        }
-      });
+      var doll = new Doll(this.options.doll);
+      dollView = new DollView({model: doll});
+      dollView.render();
     }
       
 
