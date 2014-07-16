@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-Doll.create({ xPos: 100, yPos: 100, color: '#E8CB7C', name: 'Lichard', file_name: 'doll1.svg'})
+Doll.create({ xPos: 100, yPos: 100, color: '#E8CB7C', name: 'Lichard', file_name: "doll1.svg"})
 
 
 home = Room.create({ name: "Room", quadrant: 1, file_name: "room.svg" })
