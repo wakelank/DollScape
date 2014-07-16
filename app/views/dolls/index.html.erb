@@ -4,8 +4,6 @@
 
 $(function(){
   var doll = <%== @doll %>;
-  // var doll = new Doll({id: "1"});
-
 
 //Snap.load("app/svg_images/doll.svg", onSVGLoaded ) ;
 
@@ -42,9 +40,8 @@ $('.color-zapper-btn').click(function(){
     url: "http://www.colourlovers.com/api/palettes/random",
     method: "get",
     dataType: "xml",
-    succes: function(data){
-      var jsonData = xmlToJson(data);
-      debugger;
+    success: function(data){
+      var jsonData = xmlToJson(data);      
     }
   });
 });

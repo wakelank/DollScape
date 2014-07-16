@@ -9,7 +9,7 @@ var DollView = Backbone.View.extend({
     //   id: doll.get("name"),
     //   class: "doll"
     // });
-
+    console.log(doll.attributes);
     Snap.load("images/" + doll.attributes.file_name, function(f){
       var doll_image = g.append(f);
       var matrix = doll_image.transform().globalMatrix;
