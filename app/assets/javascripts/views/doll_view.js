@@ -49,11 +49,15 @@ var DollView = Backbone.View.extend({
         for (var i = 0; i < itemsArr.length; ++ i){
           if (Snap.path.isPointInsideBBox(c.getBBox(), itemsArr[i].posx, itemsArr[i].posy)){
             doll_items.push(itemsArr[i])
+            console.log("push " + doll_items.length)
           }
-          // else{
-          //   var index = doll_items.indexOf(itemsArr[i]);
-          //   doll_items.splice(index,1);
-          // }
+        }
+        for (var i = 0; i < doll_items.length; ++i){
+           if (Snap.path.isPointInsideBBox(c.getBBox(), doll_items[i].posx, doll_items[i].posy)==false){
+            var index = doll_items.indexOf(doll_items[i]);
+            doll_items.splice(index,1);
+            console.log ("splice " + doll_items.length)
+          }
 
         }
          c.remove();
