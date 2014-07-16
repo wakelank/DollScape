@@ -19,7 +19,7 @@ var RoomView = Backbone.View.extend({
         switch (room.attributes.quadrant){
           case 1:
           debugger;
-            x = 0 - room_image.getBBox().x;
+            x = 0 - room_image.getBBox().x-100;
             y = 0 - room_image.getBBox().y;
             translate = "t" + x + "," + y;
             scale = "s.8"
@@ -29,19 +29,19 @@ var RoomView = Backbone.View.extend({
           case 2:
             var currentX = room_image.getBBox().x;
             var currentY = room_image.getBBox().y;
-            var destX=0;
-            var destY = topRoom.getBBox().width;
+            var destX= (topRoom.getBBox().width/2) + 1000;
+            var destY = topRoom.getBBox().height-1200;
 
-            var scale = "s.3"
+            var scale = "s.25"
             var translate = "t"+(destX - currentX) + "," + (destY-currentY)
             break;
           case 3:
             var currentX = room_image.getBBox().x;
             var currentY = room_image.getBBox().y;
-            var destX=0;
-            var destY = topRoom.getBBox().width + 150;
+            var destX= (topRoom.getBBox().width/2) + 1000;
+            var destY = topRoom.getBBox().height - 500;
 
-            var scale = "s.3"
+            var scale = "s.25"
             var translate = "t"+(destX - currentX) + "," + (destY-currentY)
 
 
@@ -49,10 +49,10 @@ var RoomView = Backbone.View.extend({
           case 4:
             var currentX = room_image.getBBox().x;
             var currentY = room_image.getBBox().y;
-            var destX=0;
-            var destY = topRoom.getBBox().width + 300;
+            var destX= (topRoom.getBBox().width/2) + 1000;
+            var destY = topRoom.getBBox().height +300;
 
-            var scale = "s.3"
+            var scale = "s.25"
             var translate = "t"+(destX - currentX) + "," + (destY-currentY)
           break;
         }
