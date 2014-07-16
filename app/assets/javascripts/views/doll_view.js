@@ -41,6 +41,23 @@ var DollView = Backbone.View.extend({
       startDragDoll = function(posx, posy) {
         this.ox = posx - this.cx;
         this.oy = posy - this.cy;
+        c = s.circle(posx, posy, 100)
+        c.attr({id:"circle"});
+        s.append(c);
+        var itemsArr = Snap.selectAll('.item');
+        ;
+        for (var i = 0; i < itemsArr.length; ++ i){
+          if (Snap.path.isPointInsideBBox(c.getBBox(), itemsArr[i].posx, itemsArr[i].posy)){
+            doll_items.push(itemsArr[i])
+          }
+          // else{
+          //   var index = doll_items.indexOf(itemsArr[i]);
+          //   doll_items.splice(index,1);
+          // }
+
+        }
+         c.remove();
+
       }
 
       draggingDoll = function(dx, dy, posx, posy) {
@@ -49,10 +66,11 @@ var DollView = Backbone.View.extend({
         this.cy = posy - this.oy;
         t = 't' + this.cx + ',' + this.cy + " S0.4";
         this.transform(t)
-        var itemsArr = doll_items.models;
+
     // //TODO see if an each function would work
-        for (var i = 0; i < itemsArr.length; i++ ){
-          itemsArr[i].transform(t);
+        for (var i = 0; i < doll_items.length; i++ ){
+          t = 't' + this.cx + ',' + this.cy + " S0.1";
+          doll_items[i].transform(t);
         }
 
 

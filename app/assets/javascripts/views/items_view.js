@@ -3,7 +3,7 @@ var ItemCollectionView = Backbone.View.extend({
     // this.options = options || {}
     // console.log(options.itemXPos);
     //this.listenTo(this.collection, 'all', this.render);
-    this.render(options);
+   // this.render(options);
 
   },
   render: function(options){

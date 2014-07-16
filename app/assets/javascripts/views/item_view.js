@@ -18,26 +18,22 @@ var ItemView = Backbone.View.extend({
     Snap.load("images/" + item.attributes.file_name, function(f){
       item_image = g.append(f);
       var matrix = room_image.transform().localMatrix;
-      item_image.transform("s0.25")
-      matrix.scale(.25)
+      item_image.transform("s0.1")
+     // matrix.scale(.2)
       item_image.attr({
         id: item.get("itemType") + item.get("id"),
         class: "item"
       });
       //item_image.transform(matrix);
 
-     
-        item_image.cx = 40;
-        item_image.cy = 140;
+        item_image.cx = 0;
+        item_image.cy = -100;
         item_image.ox = 0;
         item_image.oy = 0;
 
         item_image.drag(dragging, startDrag);
 
-
-
     });
-
 
         startDrag = function(posx, posy) {
           this.ox = posx - this.cx;
@@ -47,15 +43,18 @@ var ItemView = Backbone.View.extend({
         dragging = function(dx, dy, posx, posy) {
           this.cx = posx - this.ox;
           this.cy = posy - this.oy;
-          t = 't' + this.cx + ',' + this.cy + " S0.25";
+          this.posx = posx;
+          this.posy = posy;
+          t = 't' + this.cx + ',' + this.cy + " S0.1";
           var matrix = this.transform().localMatrix;
           this.transform(t);
-          ;
-          var doll_path = Snap.select('#doll_path');
-          console.log(posx + "::" + posy)
-          if (Snap.path.isPointInside(doll_path, posx, posy)){
-                  doll_items.push(this);
-          }
+          // var doll_path = Snap.select('#doll_path');
+          // console.log(posx + "::" + posy)
+          // if (Snap.path.isPointInside(doll_path, posx, posy)){
+          //         doll_items.push(this);
+          //         console.log(doll_items);
+                  
+          // }
 
         }
 
