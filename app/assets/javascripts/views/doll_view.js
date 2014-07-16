@@ -68,14 +68,30 @@ var DollView = Backbone.View.extend({
 
         this.cx = posx - this.ox;
         this.cy = posy - this.oy;
+        this.posx = posx;
+        this.posy = posy;
         t = 't' + this.cx + ',' + this.cy + " S0.4";
-        this.transform(t)
+        this.transform(t);
+        var roomArr = Snap.selectAll('.room');
+        var bigRoom;
+        for (var i = 0; i < roomArr.length; ++ i){
+          roomArr[i].remove()
+          if (Snap.path.isPointInsideBBox(roomArr[i].getBBox(), posx, posy)){
+            bigRoom = roomArr[i];
+          }else{
+            s.append(roomArr[i]);
+          }
+          s.append(bigRoom);
+        }
+      }      
 
     // //TODO see if an each function would work
+    // todo items should be in a collection
         for (var i = 0; i < doll_items.length; i++ ){
           t = 't' + this.cx + ',' + this.cy + " S0.1";
           doll_items[i].transform(t);
         }
+        
 
 
       }

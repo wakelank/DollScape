@@ -126,13 +126,14 @@ $('.item').each(function(i){
 }
 
 var doll_items = [];
+var room
 
+var room_collection = new RoomCollection();
+room_collection.url = "/rooms";
 
 
 $(function(){
   // var doll = new Doll({id: "1"});
-  var room_collection = new RoomCollection();
-  room_collection.url = "/rooms";
 
 
 //Snap.load("app/svg_images/doll.svg", onSVGLoaded ) ;
