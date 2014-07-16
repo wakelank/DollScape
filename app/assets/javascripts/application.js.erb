@@ -23,110 +23,35 @@
 
 var room1Box, room2Box, room3Box, room4Box;
 var topRoom;
-
-function clothesOff(clothes){
-  clothes.drag(function(dx, dy, x, y, e){
-    this.attr( { x: x, y: y } );
-    var box = doll.getBBox();
-    if (Snap.path.isPointInsideBBox(box, x, y)){
-      clothesArr.push(clothes);
-      clothes.undrag();
-    }
-  })
-}
-
-
-//pushes pants into doll array when they are moved onto the doll.
-//clothesArr.push(pants);
-
-
-
-  // var collection = new DollCollection();
-  // var collectionView = new DollCollectionView();
-  $('.save-btn').click(function(){
-    _.each(collectionView.models, function(doll){
-      console.log("doll: " + doll.attr("x") + ":" + doll.attr("y"))
-      $.ajax({
-        url: '/dolls',
-        method: 'put',
-        dataType: 'json',
-        data: '{ doll: {xPos:' + doll.attr("xPos") + ', yPos:' + doll.attr("yPos") + "}",
-        success: function(){
-          console.log("doll saved");
-        }
-      })
-    })
-  })
-
-  // collection.fetch();
-
-    //collection.create(doll);
-    // $.ajax({
-    //   url:'/dolls',
-    //   method: 'post',
-    //   dataType: 'json',
-    //   data: "{ doll: " + JSON.stringify(doll),
-    //   success: function(){
-    //     console.log("doll created");
-    //   }
-    // })
-
-    // var doll = s.circle(myDoll.attributes.xPos,200,50)
-    // doll.drag();
-
-
-    //myDoll.makeDoll();
-
-  // })
-  //   collection.fetch();
-
-  // $('.make-doll-btn').click(function(){
-  //   var doll = new Doll({xPos:500});
-
-  //   collection.add(doll);
-  //    dollView = new DollView({
-  //      model: doll
-  //    })
-  //    dollView.render();
-  //   debugger;
-  //   collection.create(doll);
-    // $.ajax({
-    //   url:'/dolls',
-    //   method: 'post',
-    //   dataType: 'json',
-    //   data: "{ doll: " + JSON.stringify(doll),
-    //   success: function(){
-    //     console.log("doll created");
-    //   }
-    // })
-
-    // var doll = s.circle(myDoll.attributes.xPos,200,50)
-    // doll.drag();
-
-
-    //myDoll.makeDoll();
-
-    //     _.each(this.collection.models, function(room){
-    // var roomView = new RoomView({model: room});
-    // roomView.render();
-//TODO mabe if variable were assigned out here,
-//and then rendered in the Views, then the 
-//complex drag functions could be put here.
-
-function define_movement_rules(){
-  var dollArr = document.getElementsByClassName("doll");
-  var itemArr = document.getElementsByClassName("item");
-  var dollelem = dollArr[0];
-
-//TODO see if un underscore each function would wor
-$('.item').each(function(i){
-  $(this).drag()
-})
-
-}
-
+var roomArr=[];
 var doll_items = [];
 var room;
+
+
+function makeTopRoom(room){
+  x = 0 - room.getBBox().x-100;
+  y = 0 - room.getBBox().y;
+  translate = "t" + x + "," + y;
+  scale = "s.8";
+  topRoom = room;
+  room_image.transform(scale + " " + translate);
+  roomArr[0] = room;
+}
+
+function makeSmallRoom(room, position){
+
+  
+  var currentX = room_image.getBBox().x;
+  var currentY = room_image.getBBox().y;
+  var destX= (topRoom.getBBox().width/2) + 200;
+  var destY = (topRoom.getBBox().height/2) + 700 - (position *450);
+  var scale = "s.25"
+  var translate = "t"+(destX - currentX) + "," + (destY-currentY)
+  room_image.transform(scale + " " + translate);
+  roomArr[position] = room;
+
+
+}
 
 // Changes XML to JSON
 function xmlToJson(xml) {

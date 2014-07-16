@@ -12,56 +12,34 @@ var RoomView = Backbone.View.extend({
       Snap.load("images/" + room.attributes.file_name, function(f){
     
         room_image = g.append(f);
+        roomArr.push(room_image);
         // if (topRoom != "none")
         // var y = topRoom.getBBox().height || room_image.getBBox().height;
         // var x = topRoom.getBBox().width || room_image.getBBox().width;
         //TODO room.get would probably work here
         switch (room.attributes.quadrant){
           case 1:
-          debugger;
-            x = 0 - room_image.getBBox().x-100;
-            y = 0 - room_image.getBBox().y;
-            translate = "t" + x + "," + y;
-            scale = "s.8"
-            topRoom = room_image
 
+            makeTopRoom(room_image);
             break;
           case 2:
-            var currentX = room_image.getBBox().x;
-            var currentY = room_image.getBBox().y;
-            var destX= (topRoom.getBBox().width/2) + 1000;
-            var destY = topRoom.getBBox().height-1200;
+            makeSmallRoom(room_image,1);
 
-            var scale = "s.25"
-            var translate = "t"+(destX - currentX) + "," + (destY-currentY)
             break;
           case 3:
-            var currentX = room_image.getBBox().x;
-            var currentY = room_image.getBBox().y;
-            var destX= (topRoom.getBBox().width/2) + 1000;
-            var destY = topRoom.getBBox().height - 500;
-
-            var scale = "s.25"
-            var translate = "t"+(destX - currentX) + "," + (destY-currentY)
+            makeSmallRoom(room_image,2);
 
 
             break;
           case 4:
-            var currentX = room_image.getBBox().x;
-            var currentY = room_image.getBBox().y;
-            var destX= (topRoom.getBBox().width/2) + 1000;
-            var destY = topRoom.getBBox().height +300;
+            makeSmallRoom(room_image,3);
 
-            var scale = "s.25"
-            var translate = "t"+(destX - currentX) + "," + (destY-currentY)
           break;
         }
         room_image.attr({
             id : room.get("name"),
             class : "room"
         });
-        room_image.transform(scale + " " + translate);
-        room_image.drag();
     
      });
       
@@ -112,21 +90,3 @@ var RoomView = Backbone.View.extend({
   }
 });
 
-function  moveRoomTo(room, x, y){
-  //room = Snap.select('#'+roomId);
-  room_box = room.getBBox();
-  var cx = x - room_box.x;
-  var cy = y - room_box.y;
-  room.transform("t" + cx + "," + cy);
-}
-
-function scaleRoom(room, size){
-
-  if(size == "big"){
-    scale_factor = .5;
-  }else{
-    scale_factor = .3;
-  }
-  room.transform("s"+scale_factor);
-
-}

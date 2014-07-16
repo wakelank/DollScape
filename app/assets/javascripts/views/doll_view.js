@@ -34,7 +34,7 @@ var DollView = Backbone.View.extend({
 
     });
 
-      var roomArr = Snap.selectAll('.room');
+     
 
       startDragDoll = function(posx, posy) {
         this.ox = posx - this.cx;
@@ -81,19 +81,40 @@ var DollView = Backbone.View.extend({
       }
 
       stopDragDoll = function(e){
-        var bigRoom;
-        smallScale = "S0.2";
-        bigScale = "S0.9";
-
+      //var roomArr = Snap.selectAll('.room');
         for (var i = 0; i < roomArr.length; ++ i){
           roomBox = roomArr[i].getBBox();
-          
-          if (Snap.path.isPointInsideBBox(roomBox, e.x, e.y)) {
-        
+          if (Snap.path.isPointInsideBBox(roomBox, e.x, e.y) && roomArr[i] != topRoom ) {
+            // makeTopRoom(roomArr[i]);
+            // makeSmallRoom(topRoom,i);
+            // debugger;
+
+            //move side room to top
+            var StopBox = roomArr[i].getBBox();
+            roomArr[i].transform("t0,0 s.8");      
+            var box = roomArr[i].getBBox()
+            var startx = box.x;
+            var startt = box.y;
+            roomArr[i].transform("t"+ -startx + " s.8");
+            
+            //move top room to side
+            topRoom.transform("t0,0 s.25")
+            var box = topRoom.getBBox();
+            var startx = box.x;
+            var starty = box.y;
+            var stopx = stopBox.x;
+            var stopy = stopBox.y;
+            var transform = "t" + (stopx-startx) + "," + (stopy-starty) + " s.25";
+            topRoom.transform(transform)
+            var temp = topRoom;
+            topRoom = roomArr[i];
+            roomArr[i] = temp;
+            console.log(roomArr);
            console.log("in " + roomArr[i].node.id)
-            roomArr[i].transform(bigScale);
+           
+            //roomArr[i].transform(bigScale);
           }else{
-            roomArr[i].transform(smallScale);
+            //roomArr[i].transform(smallScale);
            console.log("out " + roomArr[i].node.id)
           }
         }
