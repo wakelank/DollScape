@@ -9,6 +9,8 @@ var ItemView = Backbone.View.extend({
     this.render(options)
   },
   render: function(options){
+    var room_name = options.room;
+    
     var item = this.model;
     var color = item.get("color");
     var g = s.group();
@@ -70,28 +72,28 @@ var ItemView = Backbone.View.extend({
  
     //debugger;
     // var dollArr = document.getElementsByClassName("doll");
-    var oldX = 0;
-    var oldY = 0;
-    // var dollBox = dollArr[0].getBBox()
-    var moveFunc = function( dx, dy, posx, posy){
-      //TODO this  y-100 is to take into account the header
-      //need to use the x, y values of the Snap paper, not 
-      //page.  maybe this.arr("x"), this.attr("y")
+    // var oldX = 0;
+    // var oldY = 0;
+    // // var dollBox = dollArr[0].getBBox()
+    // var moveFunc = function( dx, dy, posx, posy){
+    //   //TODO this  y-100 is to take into account the header
+    //   //need to use the x, y values of the Snap paper, not 
+    //   //page.  maybe this.arr("x"), this.attr("y")
 
-      var newX = oldX - posx;
-      var newY = oldY - posy;
-      oldX = newX;
-      oldY = newY;
-      console.log(newX+":"+newY)
-      var matrix = this.transform().globalMatrix;
-      matrix.translate(newX, newY);
-      this.transform(matrix);
+    //   var newX = oldX - posx;
+    //   var newY = oldY - posy;
+    //   oldX = newX;
+    //   oldY = newY;
+    //   console.log(newX+":"+newY)
+    //   var matrix = this.transform().globalMatrix;
+    //   matrix.translate(newX, newY);
+    //   this.transform(matrix);
 
-      // if (Snap.path.isPointInsideBBox(dollBox,this.attr("x"),this.attr("y"))){
-      //   doll_items.push(this);
-      // }
+    //   // if (Snap.path.isPointInsideBBox(dollBox,this.attr("x"),this.attr("y"))){
+    //   //   doll_items.push(this);
+    //   // }
 
-    }
+    // }
     //item_image.drag()
     
   } 

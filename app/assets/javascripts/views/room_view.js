@@ -81,7 +81,8 @@ var RoomView = Backbone.View.extend({
     item_collection.fetch({
       success: function(){
         item_collection_view = new ItemCollectionView({
-          collection: item_collection
+          collection: item_collection,
+          room: room.get("name")
         });
 
       item_collection_view.render();

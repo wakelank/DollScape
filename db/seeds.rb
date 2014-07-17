@@ -17,5 +17,6 @@ lab = Room.create({ name: "Party", quadrant: 4, file_name: "party.svg" })
 
 Item.create(name: "shirt1", itemType:"shirt", color:"#E8E27C", room: home, file_name: "shirt1.svg")
 Item.create(name: "pants1", itemType:"pants", color:"#E87CD2", room: home, file_name: "pants1.svg")
-Item.create(name: "glasses1", itemType:"accessory", color:"#7C99E8", room: beach, file_name: "glasses1.svg")
+
+
 
