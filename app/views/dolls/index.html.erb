@@ -5,12 +5,6 @@
 $(function(){
   var doll = <%== @doll %>;
 
-//Snap.load("app/svg_images/doll.svg", onSVGLoaded ) ;
-
-// function onSVGLoaded( data ){ 
-//     s.append( data );
-// }
-
 var room_collection = new RoomCollection();
 room_collection.url = "/rooms";
 
@@ -74,13 +68,5 @@ $('.hair-color-btn').click(function(){
   }
 });
 
-
-//removes pants if doubleclicked
-// pants.dblclick(function(){
-//   var i = clothesArr.indexOf(this);
-//   clothesArr.splice(i,1);
-//   clothesOff(this);
-// })
-// clothesOff(pants);
 
 </script>

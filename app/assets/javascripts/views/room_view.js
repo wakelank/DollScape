@@ -13,10 +13,9 @@ var RoomView = Backbone.View.extend({
     
         room_image = g.append(f);
         roomArr.push(room_image);
-        // if (topRoom != "none")
-        // var y = topRoom.getBBox().height || room_image.getBBox().height;
-        // var x = topRoom.getBBox().width || room_image.getBBox().width;
-        //TODO room.get would probably work here
+
+        //I wrote these functions below and the switch statement is no longer needed
+        //but I don't want to alter the code at the last minute.
         switch (room.attributes.quadrant){
 
           case 1:
@@ -42,10 +41,6 @@ var RoomView = Backbone.View.extend({
         });
     
      });
-      
-
-
-
 
     //TODO DollView should be get rooms/:id/dolls/ 
     //so we don't need this if statement and 
@@ -57,27 +52,9 @@ var RoomView = Backbone.View.extend({
       dollView.render();
     }
 
-
-
-      
-
-     // item_collection.url = "/rooms/" + this.model.get("id") + "/items";
-  //     item_collection.fetch({
-  //     success: function(){
-  //       // console.log(item_collection);
-  //       item_collection_view = new ItemCollectionView({
-  //         collection: item_collection,
-  //         itemXPos: 10,
-  //         itemYPos: 10
-  //   })
-  // }
-
     var item_collection = new ItemCollection({});
     item_collection.url = "/rooms/" + this.model.get("id") + "/items";
 
-  //   var itemXPos= xPos + 10;
-    //var itemYPos= yPos + 20;
-    //var that = this;
     item_collection.fetch({
       success: function(){
         item_collection_view = new ItemCollectionView({

@@ -1,28 +1,25 @@
-== README
+DollScape:
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a simple paper doll app for children.  They can change the skin and hair color of the doll.  Clothes can be dragged on and off the doll, and if they are on they will move when the doll is moved.  The doll can be moved to different settings cards.  When the doll enters the setting it expands to give the child a larger play area.
 
-Things you may want to cover:
+Libraries:
+  javascript
+  backbone
+  jquery
+  underscore
+  snap.svg (www.snapsvg.io)
 
-* Ruby version
+Github:
+  https://github.com/wakelank/DollScape
+  
+Heroku:
+  http://vast-sea-1959.herokuapp.com/
 
-* System dependencies
+This app is 100% SVG images.  These proved to be more difficult and unpredictible to work with than I had expected, which accounts for the unpolished quality of the app.
 
-* Configuration
+Challenges:
+  While individual shapes have x,y coordinates that one can get and set programatically, groups of shapes do not.  The only way to move a group is with a transform, which a very subtle thing to work with.  It seems to move an item only relative to it's original position, so calculating the transform need to move an element from someplace not the orignal position to another is difficult.  I simplified the calculation to move and expand the location cards by first translating the card back to it's original position, and then to the desired one.
 
-* Database creation
+  Translating an element does not always move the bounding box along with it.  I found that the clothes were only sticking to the doll when they were moved to the dolls original location, and not to where the doll actually is.  I hacked a solution by creating a circle around the doll on dragstart, and anything in this circle would be attached to the doll, then the circle is destroyed before the doll moves
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+  I have many for clothes and accessories for the doll, but the svg files seems to scale differently be default.  I think either Snap or the browser makes each svg image the same size in the browser no matter what the hight and width of the image is.  So each items needs to be scaled individually, and I didn't have time to figure this out.  They also need to be scaled every time they are translated or they will revert to their original size, which nearly fills the browser window.

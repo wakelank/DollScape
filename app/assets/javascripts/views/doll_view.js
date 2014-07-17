@@ -54,8 +54,6 @@ var DollView = Backbone.View.extend({
           itemY = itemBox.y + (itemBox.height/2);
           
           if (Snap.path.isPointInsideBBox(c.getBBox(), itemX, itemY)){
-
-
             if (doll_items.indexOf(itemsArr[i]) == -1){
               doll_items.push(itemsArr[i])
               console.log("push " + doll_items.length)
@@ -84,15 +82,10 @@ var DollView = Backbone.View.extend({
         this.posy = posy;
         t = 't' + this.cx + ',' + this.cy + " S0.4";
         this.transform(t);
-        // console.log(this.getBBox());
-        // for (var i = 0; i < doll_items.length; i++ ){
-        //   t = 't' + this.cx + ',' + this.cy + " S0.1";
-        // doll_items[i].transform(t);
+
         for (var i = 0; i < doll_items.length; i++ ){
           var xDiff = doll_items[i].posx - posx;
           var yDiff = doll_items[i].posy - posy;
-          // doll_items[i].cx = posx - doll_items[i].ox;
-          // doll_items[i].cy = posy - doll_items[i].oy;
 
           doll_items[i].cx = this.cx;
           doll_items[i].cy = this.cy;
@@ -108,13 +101,10 @@ var DollView = Backbone.View.extend({
       }
 
       stopDragDoll = function(e){
-      //var roomArr = Snap.selectAll('.room');
         for (var i = 0; i < roomArr.length; ++ i){
           roomBox = roomArr[i].getBBox();
           if (Snap.path.isPointInsideBBox(roomBox, e.x, e.y) && roomArr[i] != topRoom ) {
-            // makeTopRoom(roomArr[i]);
-            // makeSmallRoom(topRoom,i);
-            // debugger;
+  
 
             //move side room to top
             var stopBox = roomArr[i].getBBox();
@@ -139,44 +129,13 @@ var DollView = Backbone.View.extend({
             console.log(roomArr);
            console.log("in " + roomArr[i].node.id)
            
-            //roomArr[i].transform(bigScale);
           }else{
-            //roomArr[i].transform(smallScale);
            console.log("out " + roomArr[i].node.id)
           }
         }
 
       }      
 
-    // //TODO see if an each function would work
-    // todo items should be in a collection
-
-        
-
-
-      }
-      // stopDrag = function(posx, posy){
-      //   c = s.circle(posx.x, posx.y, 30);
-      //   s.append(c);
-      // }
-
-  //   var moveFunc = function( dx, dy, posx, posy){
-  //     //TODO this  y-100 is to take into account the header
-  //     //need to use the x, y values of the Snap paper, not 
-  //     //page.  maybe this.arr("x"), this.attr("y")
-  //     this.attr({ cx: posx, cy: posy-100})
-
-  //     var itemsArr = doll_items.models;
-  // // //TODO see if an each function would work
-  //   for (var i = 0; i < itemsArr.length; i++ ){
-  //     itemsArr[i].attributes.attr({ x: posx, y: posy-100 })
-  //   }
-  
-
-  //   }
-
-    
-
-    //return this;
+  }
   
 });
