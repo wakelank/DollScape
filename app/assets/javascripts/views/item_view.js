@@ -41,7 +41,6 @@ var ItemView = Backbone.View.extend({
         }
 
         dragging = function(dx, dy, e) {
-          debugger;
           this.cx = e.x - this.ox;
           this.cy = e.y - this.oy;
           this.posx = e.x;
