@@ -90,12 +90,12 @@ var DollView = Backbone.View.extend({
             // debugger;
 
             //move side room to top
-            var StopBox = roomArr[i].getBBox();
-            roomArr[i].transform("t0,0 s.8");      
+            var stopBox = roomArr[i].getBBox();
+            roomArr[i].transform("t0,0 s.6");      
             var box = roomArr[i].getBBox()
             var startx = box.x;
             var startt = box.y;
-            roomArr[i].transform("t"+ -startx + " s.8");
+            roomArr[i].transform("t"+ -startx + " s.6");
             
             //move top room to side
             topRoom.transform("t0,0 s.25")

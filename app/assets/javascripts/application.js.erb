@@ -29,7 +29,9 @@ var room;
 
 
 function makeTopRoom(room){
-  x = 0 - room.getBBox().x-100;
+  debugger;
+  room.transform("t0,0 s0.8")
+  x = 0 - room.getBBox().x;
   y = 0 - room.getBBox().y;
   translate = "t" + x + "," + y;
   scale = "s.8";

@@ -18,8 +18,9 @@ var RoomView = Backbone.View.extend({
         // var x = topRoom.getBBox().width || room_image.getBBox().width;
         //TODO room.get would probably work here
         switch (room.attributes.quadrant){
-          case 1:
 
+          case 1:
+            debugger;
             makeTopRoom(room_image);
             break;
           case 2:
