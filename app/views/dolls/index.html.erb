@@ -1,5 +1,5 @@
-<button class="color-btn">skin color</button>
-<button class="color-zapper-btn">color zapper</button>
+<button class="skin-color-btn">skin color</button>
+<button class="hair-color-btn">hair color</button>
 <script>
 
 $(function(){
@@ -28,22 +28,50 @@ room_collection.fetch({
 
 var s = Snap();
 
-$('.color-btn').click(function(){
-  Snap.select('#doll_path').attr({
-    fill: "#DFC183"
+var skinColorArr = [
+  "rgb(255, 204, 153)",
+  "rgb(250, 231, 208)",
+  "rgb(206, 171, 105)",
+  "rgb(123, 75, 42)"
+    ];
+
+  var hairColorArr = [
+  "rgb(39, 43, 42)",
+  "rgb(178, 110, 4)",
+  "rgb(166, 124, 38)",
+  "rgb(225, 203, 154)",
+  "rgb(153, 0, 0)"
+    ];
+
+function getNextColor(arr, startVal){
+  var index = arr.indexOf(startVal);
+  var index = index + 1;
+  if (index == arr.length){ index = 0; }
+  return arr[index];
+
+}
+
+
+$('.skin-color-btn').click(function(){
+  var currentColor = Snap.select('.doll-skin').attr("fill");
+  var skinPathArr = Snap.selectAll('.doll-skin');
+  for (var i = 0; i < skinPathArr.length; ++i){
+  skinPathArr[i].attr({
+    fill : getNextColor(skinColorArr, currentColor)
   });
+}
 
 });
-$('.color-zapper-btn').click(function(){
 
-  $.ajax({
-    url: "http://www.colourlovers.com/api/palettes/random",
-    method: "get",
-    dataType: "xml",
-    success: function(data){
-      var jsonData = xmlToJson(data);      
-    }
-  });
+
+$('.hair-color-btn').click(function(){
+  var currentColor = Snap.select('.doll-hair').attr('fill');
+  var hairPathArr = Snap.selectAll('.doll-hair');
+  for (var i = 0; i < hairPathArr.length; ++i){
+    hairPathArr[i].attr({
+      fill : getNextColor(hairColorArr, currentColor)
+    })
+  }
 });
 
 
