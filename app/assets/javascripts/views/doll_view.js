@@ -68,7 +68,7 @@ var DollView = Backbone.View.extend({
             var index = doll_items.indexOf(doll_items[i]);
             doll_items.splice(index,1);
             console.log ("splice " + doll_items.length)
-            console.log("doll_items[i].posx" + ":" + "doll_items[i].posy")
+            console.log(doll_items[i].posx + ":" + doll_items[i].posy)
           }
 
         }
