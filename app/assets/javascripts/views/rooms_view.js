@@ -9,6 +9,7 @@ var RoomCollectionView = Backbone.View.extend({
       var roomView = new RoomView({model: room, doll: myDoll});
       roomView.render();
     });
+    
   }
 
 });
