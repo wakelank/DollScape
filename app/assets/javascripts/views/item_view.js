@@ -31,7 +31,7 @@ var ItemView = Backbone.View.extend({
         item_image.ox = 0;
         item_image.oy = 0;
 
-        item_image.drag(dragging, startDrag);
+        item_image.drag(startDrag, dragging);
 
     });
 

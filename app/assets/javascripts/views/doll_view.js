@@ -45,21 +45,28 @@ var DollView = Backbone.View.extend({
         var itemsArr = Snap.selectAll('.item');
         
         for (var i = 0; i < itemsArr.length; ++ i){
-          if (Snap.path.isPointInsideBBox(c.getBBox(), itemsArr[i].posx, itemsArr[i].posy)){
+          var itemBox = itemsArr[i].getBBox();
+          var itemX = itemBox.x + (itemBox.width/2);
+          var itemY = itemBox.y + (itemBox.height/2);
+          console.log(itemX+":"+itemY);
+          console.log(c.getBBox());
 
-            doll_items.push(itemsArr[i])
-            console.log("push " + doll_items.length)
+          if (Snap.path.isPointInsideBBox(c.getBBox(), itemX, itemY)){
+            if (doll_items.indexOf(itemsArr[i]) > -1){
+              doll_items.push(itemsArr[i]);
+              console.log("push " + doll_items.length)
+            }
           }
         }
-        for (var i = 0; i < doll_items.length; ++i){
-           if (Snap.path.isPointInsideBBox(c.getBBox(), doll_items[i].posx, doll_items[i].posy)==false){
-            var index = doll_items.indexOf(doll_items[i]);
-            doll_items.splice(index,1);
-            console.log ("splice " + doll_items.length)
-          }
+        // for (var i = 0; i < doll_items.length; ++i){
+        //    if (Snap.path.isPointInsideBBox(this.getBBox(), doll_items[i].posx, doll_items[i].posy)==false){
+        //     var index = doll_items.indexOf(doll_items[i]);
+        //     doll_items.splice(index,1);
+        //     console.log ("splice " + doll_items.length)
+        //   }
 
-        }
-         c.remove();
+        // }
+          c.remove();
 
       }
 
@@ -71,7 +78,7 @@ var DollView = Backbone.View.extend({
         this.posy = posy;
         t = 't' + this.cx + ',' + this.cy + " S0.4";
         this.transform(t);
-
+        // console.log(this.getBBox());
         for (var i = 0; i < doll_items.length; i++ ){
           t = 't' + this.cx + ',' + this.cy + " S0.1";
         doll_items[i].transform(t);
