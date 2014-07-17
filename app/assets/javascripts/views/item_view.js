@@ -40,11 +40,12 @@ var ItemView = Backbone.View.extend({
           this.oy = posy - this.cy;
         }
 
-        dragging = function(dx, dy, posx, posy) {
-          this.cx = posx - this.ox;
-          this.cy = posy - this.oy;
-          this.posx = posx;
-          this.posy = posy;
+        dragging = function(dx, dy, e) {
+          debugger;
+          this.cx = e.x - this.ox;
+          this.cy = e.y - this.oy;
+          this.posx = e.x;
+          this.posy = e.y;
           t = 't' + this.cx + ',' + this.cy + " S0.1";
           var matrix = this.transform().localMatrix;
           this.transform(t);
