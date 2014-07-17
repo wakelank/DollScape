@@ -27,7 +27,7 @@ var ItemView = Backbone.View.extend({
       //item_image.transform(matrix);
 
         item_image.cx = 0;
-        item_image.cy = -100;
+        item_image.cy = 0;
         item_image.ox = 0;
         item_image.oy = 0;
 

@@ -36,37 +36,43 @@ var DollView = Backbone.View.extend({
 
      
 
-      startDragDoll = function(posx, posy) {
+        startDragDoll = function(posx, posy) {
         this.ox = posx - this.cx;
         this.oy = posy - this.cy;
-        c = s.circle(posx, posy, 100)
+        var dollBox = this.getBBox();
+        var dollX = dollBox.x + (dollBox.width/2);
+        var dollY = dollBox.y + (dollBox.height/2);
+
+        c = s.circle(dollX, dollY, 100)
         c.attr({id:"circle"});
         s.append(c);
         var itemsArr = Snap.selectAll('.item');
         
         for (var i = 0; i < itemsArr.length; ++ i){
-          var itemBox = itemsArr[i].getBBox();
-          var itemX = itemBox.x + (itemBox.width/2);
-          var itemY = itemBox.y + (itemBox.height/2);
-          console.log(itemX+":"+itemY);
-          console.log(c.getBBox());
-
+          itemBox = itemsArr[i].getBBox();
+          itemX = itemBox.x + (itemBox.width/2);
+          itemY = itemBox.y + (itemBox.height/2);
+          
           if (Snap.path.isPointInsideBBox(c.getBBox(), itemX, itemY)){
-            if (doll_items.indexOf(itemsArr[i]) > -1){
-              doll_items.push(itemsArr[i]);
+
+
+            if (doll_items.indexOf(itemsArr[i]) == -1){
+              doll_items.push(itemsArr[i])
               console.log("push " + doll_items.length)
             }
           }
         }
-        // for (var i = 0; i < doll_items.length; ++i){
-        //    if (Snap.path.isPointInsideBBox(this.getBBox(), doll_items[i].posx, doll_items[i].posy)==false){
-        //     var index = doll_items.indexOf(doll_items[i]);
-        //     doll_items.splice(index,1);
-        //     console.log ("splice " + doll_items.length)
-        //   }
+        for (var i = 0; i < doll_items.length; ++i){
+          
+           if (Snap.path.isPointInsideBBox(c.getBBox(), doll_items[i].posx, doll_items[i].posy)==false){
+            var index = doll_items.indexOf(doll_items[i]);
+            doll_items.splice(index,1);
+            console.log ("splice " + doll_items.length)
+            console.log("doll_items[i].posx" + ":" + "doll_items[i].posy")
+          }
 
-        // }
-          c.remove();
+        }
+         c.remove();
 
       }
 
@@ -79,8 +85,22 @@ var DollView = Backbone.View.extend({
         t = 't' + this.cx + ',' + this.cy + " S0.4";
         this.transform(t);
         // console.log(this.getBBox());
+        // for (var i = 0; i < doll_items.length; i++ ){
+        //   t = 't' + this.cx + ',' + this.cy + " S0.1";
+        // doll_items[i].transform(t);
         for (var i = 0; i < doll_items.length; i++ ){
-          t = 't' + this.cx + ',' + this.cy + " S0.1";
+          var xDiff = doll_items[i].posx - posx;
+          var yDiff = doll_items[i].posy - posy;
+          // doll_items[i].cx = posx - doll_items[i].ox;
+          // doll_items[i].cy = posy - doll_items[i].oy;
+
+          doll_items[i].cx = this.cx;
+          doll_items[i].cy = this.cy;
+          doll_items[i].posx = posx;
+          doll_items[i].posy = posy;
+
+
+          t = 't' + doll_items[i].cx + ',' + doll_items[i].cy + " S0.1";
         doll_items[i].transform(t);
         }
         
