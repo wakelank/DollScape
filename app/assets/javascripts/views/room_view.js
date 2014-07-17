@@ -13,6 +13,7 @@ var RoomView = Backbone.View.extend({
     
         room_image = g.append(f);
         roomArr.push(room_image);
+        debugger;
         // if (topRoom != "none")
         // var y = topRoom.getBBox().height || room_image.getBBox().height;
         // var x = topRoom.getBBox().width || room_image.getBBox().width;
