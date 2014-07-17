@@ -29,7 +29,7 @@ var room;
 
 
 function makeTopRoom(room){
-  debugger;
+  
   room.transform("t0,0 s0.8")
   x = 0 - room.getBBox().x;
   y = 0 - room.getBBox().y;
@@ -45,8 +45,8 @@ function makeSmallRoom(room, position){
   
   var currentX = room_image.getBBox().x;
   var currentY = room_image.getBBox().y;
-  var destX= (topRoom.getBBox().width/2) + 200;
-  var destY = (topRoom.getBBox().height/2) + 700 - (position *450);
+  var destX= 1300;
+  var destY = 750 - (position *450);
   var scale = "s.25"
   var translate = "t"+(destX - currentX) + "," + (destY-currentY)
   room_image.transform(scale + " " + translate);
